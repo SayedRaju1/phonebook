@@ -1,6 +1,7 @@
 import { Box, Container, makeStyles, Typography } from '@material-ui/core';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { AuthContext } from '../App';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -15,23 +16,35 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.primary.main,
         fontSize: '50px',
         fontWeight: 'Bold',
-        // border: '1px solid red'
+
     },
-    header__login: {
+    header__loginout: {
         color: theme.palette.primary.main,
         fontSize: '20px',
         fontWeight: 'Bold',
+        cursor: 'pointer'
         // border: '1px solid red'
     }
 }));
 
 const Header = () => {
     const classes = useStyles();
+    const history = useHistory()
+    const [isAuthenticated, setIsAuthenticated] = useContext(AuthContext);
+
+    const handleLogout = () => {
+        setIsAuthenticated(false)
+        // history.push("/login")
+    }
+
+    if (!isAuthenticated) { history.push("/login") }
     return (
         <Container maxWidth="xl sm md lg">
             <Box display="flex" justifyContent="space-between" alignItems="center" className={classes.header}>
                 <Typography className={classes.logo}>Phonebook</Typography>
-                <Typography className={classes.header__login}>Login</Typography>
+                <Typography className={classes.header__loginout} onClick={handleLogout}>
+                    {isAuthenticated ? 'Logout' : 'Login'}
+                </Typography>
             </Box>
         </Container>
     );
