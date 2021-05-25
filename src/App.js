@@ -11,9 +11,11 @@ export const AuthContext = createContext();
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [loggedinUser, setLoggedinUser] = useState({})
+  const [token, setToken] = useState('')
   return (
     <div style={{ backgroundColor: '#F8FFFC', height: '100vh' }}>
-      <AuthContext.Provider value={[isAuthenticated, setIsAuthenticated]}>
+      <AuthContext.Provider value={[isAuthenticated, setIsAuthenticated, loggedinUser, setLoggedinUser, token, setToken]}>
         <ThemeProvider theme={customTheme}>
           <Router>
             <Header />

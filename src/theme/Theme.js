@@ -4,6 +4,9 @@ export const customTheme = createMuiTheme({
     palette: {
         primary: {
             main: "#00955C"
+        },
+        secondary: {
+            main: "#E5FAF2"
         }
     },
     typography: {
